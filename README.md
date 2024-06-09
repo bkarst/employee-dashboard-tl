@@ -1,4 +1,4 @@
-***Employee Dashboard TL
+##Employee Dashboard TL
 
 1. Run `npm install` in the root directory of the project. 
 
