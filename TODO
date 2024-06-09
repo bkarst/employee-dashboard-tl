@@ -1,0 +1,109 @@
+Modify table to employee
+Add create employee
+add edit employee
+add delete employee
+connect form, use the z
+
+Develop an internal web-based dashboard for managing employee details within a company. The dashboard should allow HR staff to add, update, view, and delete employee records. Each employee record should include the following information: Employee ID, Name, Department, Position, Salary, Bio, and Status (Active/Inactive).
+
+Technical Requirements:
+
+• Backend: Use Node.js for the server-side logic.
+
+• Database: Use either PostgreSQL or MongoDB for storing employee data. Ensure proper database schema design for employee records.
+
+• Frontend: Use any modern JavaScript framework/library (React, Angular, Vue) for the frontend. The dashboard should be responsive and provide a seamless user experience on both desktop and mobile.
+
+• API Design: Design RESTful APIs for handling CRUD operations (Create, Read, Update, Delete) on employee records.
+
+• [Bonus point]  Implement a chatbot tab on the webpage, which allows the HR staff to ask questions about the employees based on their bio. You may use OpenAI chatbot API and RAG libraries (LlamaIndex, LangChain) to implement this feature.
+
+ 
+
+Features:
+
+• View Employees: Display a list of employees in a tabular format. Include a feature to filter employees by department and status.
+
+• Add Employee: A form to add a new employee record to the database. Ensure validation is in place for each input field.
+
+• Edit Employee: Option to edit existing employee records. Implement a modal or separate page for editing.
+
+• Delete Employee: Option to delete an employee record. Include a confirmation prompt before deletion.
+
+•
+
+Submission Instructions:
+
+• Provide a GitHub repository link containing all source code.
+
+• Include a README file with setup instructions, including how to install dependencies, configure the database, and run the application.
+
+• Document the user flow, i.e. how a user interacts with the web application.
+
+• Document the API endpoints and any assumptions made during the development process.
+
+
+
+
+
+curl -X POST http://localhost:3000/api/employee \
+-H "Content-Type: application/json" \
+-d '{
+  "employee_id": "12345",
+  "name": "John Doe",
+  "department": "Engineering",
+  "position": "Software Engineer",
+  "salary": 75000,
+  "bio": "Experienced software engineer with a background in developing scalable applications.",
+  "status": "active"
+}'
+
+curl -X PUT http://localhost:3000/api/employee \
+-H "Content-Type: application/json" \
+-d '{
+  "employee_id": "12345",
+  "name": "John Doe",
+  "department": "Engineering",
+  "position": "Software Engineer",
+  "salary": 75000,
+  "bio": "Experienced software engineer with a background in developing scalable applications.",
+  "status": "active"
+}'
+
+curl -X POST http://localhost:3000/api/employee \
+-H "Content-Type: application/json" \
+-d '{
+  "employee_id": "",
+  "name": "John Doe",
+  "department": "Engineering",
+  "position": "Software Engineer",
+  "salary": 75000,
+  "bio": "Experienced software engineer with a background in developing scalable applications.",
+  "status": "active"
+}'
+
+
+curl -X POST http://localhost:3000/submit-form \
+-H "Content-Type: application/json" \
+-d '{
+  "employee_id": "12345",
+  "name": "John Doe",
+  "department": "Engineering",
+  "position": "Software Engineer",
+  "salary": 75000,
+  "bio": "Experienced software engineer with a background in developing scalable applications.",
+  "status": "active"
+}'
+
+curl -X POST http://localhost:3000/submit-form \
+-H "Content-Type: application/json" \
+-d '{
+  "efeemployee_id": "12345",
+  "name": "John Doe",
+  "department": "Engineering",
+  "position": "Software Engineer",
+  "salary": 75000,
+  "bio": "Experienced software engineer with a background in developing scalable applications.",
+  "status": "active"
+}'
+
