@@ -1,3 +1,7 @@
+delete
+seed employees
+make employee id unique
+
 Modify table to employee
 Add create employee
 add edit employee
@@ -29,8 +33,6 @@ Features:
 • Edit Employee: Option to edit existing employee records. Implement a modal or separate page for editing.
 
 • Delete Employee: Option to delete an employee record. Include a confirmation prompt before deletion.
-
-•
 
 Submission Instructions:
 

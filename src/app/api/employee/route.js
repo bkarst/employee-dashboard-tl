@@ -1,7 +1,5 @@
-import {
-  createEmployeeSchema,
-  validateZodSchema
-} from "@/lib/zodSchemas";
+import "dotenv/config";
+import { createEmployeeSchema, validateZodSchema } from "@/lib/zodSchemas";
 import { PrismaClient } from "@prisma/client";
 import "dotenv/config";
 import { NextResponse } from "next/server";
@@ -28,6 +26,26 @@ export async function POST(req) {
   return NextResponse.json(
     {
       employee,
+    },
+    {
+      status: 200,
+    }
+  );
+}
+
+export async function DELETE(req) {
+  const searchParams = req.nextUrl.searchParams;
+  const id = searchParams.get("id");
+
+  const deleteUser = await prisma.employee.delete({
+    where: {
+      id: parseInt(id),
+    },
+  });
+
+  return NextResponse.json(
+    {
+      deleted: true,
     },
     {
       status: 200,

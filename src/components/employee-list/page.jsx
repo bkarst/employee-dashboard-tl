@@ -20,7 +20,13 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import EditEmployee from "../edit-employee/page";
+import { MdDelete } from "react-icons/md";
 import NewEmployee from "../new-employee/page";
+import { AiOutlineDelete } from "react-icons/ai";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
+import { DialogHeader } from "../ui/dialog";
+import { EditEmployeeForm } from "../edit-employee/edit-employee-form";
+import { FaEdit } from "react-icons/fa";
 
 export default function EmployeeList() {
   const [search, setSearch] = useState("");
@@ -28,47 +34,11 @@ export default function EmployeeList() {
   const [sortDirection, setSortDirection] = useState("asc");
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
-    axios.get('/api/employees').then( response => {
-      setEmployees(response.data.employees)
-    })
-  },[])
-  // const employees = [
-  //   {
-  //     id: 1,
-  //     name: "John Doe",
-  //     title: "Software Engineer",
-  //     department: "Engineering",
-  //     startDate: "2020-05-01",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Jane Smith",
-  //     title: "Product Manager",
-  //     department: "Product",
-  //     startDate: "2018-09-15",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Bob Johnson",
-  //     title: "Sales Representative",
-  //     department: "Sales",
-  //     startDate: "2022-03-01",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Sarah Lee",
-  //     title: "Marketing Coordinator",
-  //     department: "Marketing",
-  //     startDate: "2021-11-01",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Tom Wilson",
-  //     title: "IT Support Specialist",
-  //     department: "IT",
-  //     startDate: "2019-07-01",
-  //   },
-  // ];
+    axios.get("/api/employees").then((response) => {
+      setEmployees(response.data.employees);
+    });
+  }, []);
+
   const filteredEmployees = employees.filter((employee) =>
     employee.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -80,6 +50,16 @@ export default function EmployeeList() {
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
+
+  const deleteEmployee = (employeeId) => {
+    if (confirm("Are you sure?")) {
+      axios.delete(`/api/employee?id=${employeeId}`).then(() => {
+        setEmployees(employees.filter((employee) => employee.id != employeeId));
+        // window.location = "/";
+      });
+    }
+  };
+
   const handleSort = (column) => {
     if (sortColumn === column) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -88,6 +68,12 @@ export default function EmployeeList() {
       setSortDirection("asc");
     }
   };
+
+  let employee = null
+  if (employees.length > 0) {
+    employee = employees[0]
+  }
+
   return (
     <div className="flex flex-col h-screen">
       <header className="bg-gray-900 text-white py-4 px-6">
@@ -96,14 +82,12 @@ export default function EmployeeList() {
             <Package2Icon className="w-6 h-6" />
             <span className="text-lg font-bold">Acme Inc</span>
           </Link>
-          <nav className="hidden md:flex items-center gap-6">
-          </nav>
-          <div className="flex items-center gap-4">
-            
-          </div>
+          <nav className="hidden md:flex items-center gap-6"></nav>
+          <div className="flex items-center gap-4"></div>
         </div>
       </header>
       <main className="flex-1 p-6">
+        
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">Employees</h1>
           <div className="flex items-center gap-4">
@@ -138,6 +122,8 @@ export default function EmployeeList() {
           </div>
         </div>
         <div className="border shadow-sm rounded-lg">
+        
+
           <Table>
             <TableHeader>
               <TableRow>
@@ -145,6 +131,7 @@ export default function EmployeeList() {
                 <TableHead>Title</TableHead>
                 <TableHead>Department</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Delete</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -153,18 +140,26 @@ export default function EmployeeList() {
                   <TableCell className="font-medium">
                     <EditEmployee employee={employee} />
                   </TableCell>
-
                   <TableCell>{employee.position}</TableCell>
                   <TableCell>{employee.department}</TableCell>
+                  <TableCell>{employee.status}</TableCell>
                   <TableCell>
-                    {employee.status}
+                    <Button
+                      variant="bordered"
+                      onClick={() => deleteEmployee(employee.id)}
+                    >
+                      <AiOutlineDelete color={"red"} size={22} />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
+
+              
         </div>
       </main>
+      
     </div>
   );
 }

@@ -6,7 +6,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { FaEdit } from "react-icons/fa";
 import { EditEmployeeForm } from "./edit-employee-form";
@@ -16,7 +16,7 @@ export default function EditEmployee({ employee }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="link">
-          {employee.name} <FaEdit className="ml-2" />
+          { employee.name } <FaEdit className="ml-2" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px]">

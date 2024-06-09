@@ -29,7 +29,7 @@ export default function NewEmployee() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>Create</DialogTitle>
+          <DialogTitle>New Employee</DialogTitle>
           <DialogDescription>
             Enter employee information below...
           </DialogDescription>
