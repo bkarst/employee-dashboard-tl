@@ -19,17 +19,22 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import EditEmployee from "../edit-employee/page";
-import { MdDelete } from "react-icons/md";
-import NewEmployee from "../new-employee/page";
 import { AiOutlineDelete } from "react-icons/ai";
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
-import { DialogHeader } from "../ui/dialog";
-import { EditEmployeeForm } from "../edit-employee/edit-employee-form";
-import { FaEdit } from "react-icons/fa";
+import EditEmployee from "../edit-employee/page";
+import NewEmployee from "../new-employee/page";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 export default function EmployeeList() {
   const [search, setSearch] = useState("");
+  const [filters, setFilters] = useState([]);
   const [sortColumn, setSortColumn] = useState("name");
   const [sortDirection, setSortDirection] = useState("asc");
   const [employees, setEmployees] = useState([]);
@@ -39,7 +44,19 @@ export default function EmployeeList() {
     });
   }, []);
 
-  const filteredEmployees = employees.filter((employee) =>
+  // Function to remove a filter
+
+  const applyFilters = () => {
+    return employees.filter((item) => {
+      return filters.every(
+        (filter) => item[filter[0]] == filter[1] || filter[1] == null
+      );
+    });
+  };
+
+  const filteredList = applyFilters();
+
+  const filteredEmployees = filteredList.filter((employee) =>
     employee.name.toLowerCase().includes(search.toLowerCase())
   );
   const sortedEmployees = filteredEmployees.sort((a, b) => {
@@ -47,15 +64,11 @@ export default function EmployeeList() {
     if (a[sortColumn] > b[sortColumn]) return sortDirection === "asc" ? 1 : -1;
     return 0;
   });
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
 
   const deleteEmployee = (employeeId) => {
     if (confirm("Are you sure?")) {
       axios.delete(`/api/employee?id=${employeeId}`).then(() => {
         setEmployees(employees.filter((employee) => employee.id != employeeId));
-        // window.location = "/";
       });
     }
   };
@@ -69,9 +82,31 @@ export default function EmployeeList() {
     }
   };
 
-  let employee = null
+  const addFilter = (column, value) => {
+    let replaced = false;
+    let newFilters = [];
+    for (let i = 0; i < filters.length; i++) {
+      const filter = filters[i];
+      console.log('column', column)
+      console.log('filter', filter[0])
+      if (column == filter[0]) {
+        newFilters.push([column, value]);
+        replaced = true;
+      } else {
+        newFilters.push(filter);
+      }
+    }
+    if (!replaced) {
+      newFilters.push([column, value]);
+    }
+    console.log('newFilters', newFilters)
+    setFilters(newFilters);
+  };
+
+  let employee = null;
+  
   if (employees.length > 0) {
-    employee = employees[0]
+    employee = employees[0];
   }
 
   return (
@@ -87,11 +122,44 @@ export default function EmployeeList() {
         </div>
       </header>
       <main className="flex-1 p-6">
-        
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">Employees</h1>
           <div className="flex items-center gap-4">
             <NewEmployee />
+            <Select onValueChange={(value) => {
+                addFilter("department", value);
+              }}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Filter by Department" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Department</SelectLabel>
+                  <SelectItem value="Engineering">Engineering</SelectItem>
+                  <SelectItem value="Customer Support">Customer Support	</SelectItem>
+                  <SelectItem value="Finance">Finance</SelectItem>
+                  <SelectItem value={null}>All</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select
+              onValueChange={(value) => {
+                addFilter("status", value);
+              }}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Filter by Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Status</SelectLabel>
+                  <SelectItem value="inactive">Inactive</SelectItem>
+                  <SelectItem value="active">Active</SelectItem>
+                  <SelectItem value={null}>All</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
@@ -122,8 +190,6 @@ export default function EmployeeList() {
           </div>
         </div>
         <div className="border shadow-sm rounded-lg">
-        
-
           <Table>
             <TableHeader>
               <TableRow>
@@ -155,11 +221,8 @@ export default function EmployeeList() {
               ))}
             </TableBody>
           </Table>
-
-              
         </div>
       </main>
-      
     </div>
   );
 }
