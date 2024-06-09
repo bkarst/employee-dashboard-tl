@@ -14,6 +14,10 @@ This employee management application streamlines HR operations by providing a re
 
 5. Run `npm run dev` and navigate to `http://localhost:3000`
 
+
+
+
 ### Continued Development
 
-For changes to the db schema, refer to the [prisma documentation] (https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema)
+For changes to the db schema, refer to [Prisma Documentation](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema).
+
