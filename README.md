@@ -6,7 +6,7 @@ This employee management application streamlines HR operations by providing a re
 
 1. Run `npm install` in the root directory of the project. 
 
-2. Set the `DATABASE_URL` in the .env file to point to your postgres database. Refer to .env.sample as an example. 
+2. Create a `.env` file in the root directory or the project and set the `DATABASE_URL` to the desired postgres connection string. Refer to `.env.sample` as an example. 
 
 3. Run `npx prisma db push` to push the initial schema to the database. 
 
