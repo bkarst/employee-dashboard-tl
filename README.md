@@ -1,8 +1,8 @@
-## Employee Dashboard TL
+# Employee Dashboard TL
 
 This employee management application streamlines HR operations by providing a responsive dashboard for managing employee records, including features to view, add, edit, and delete employees with robust data validation.
 
-### Getting Started
+## Getting Started
 
 1. Run `npm install` in the root directory of the project.
 
@@ -14,35 +14,35 @@ This employee management application streamlines HR operations by providing a re
 
 5. Run `npm run dev` and navigate to `http://localhost:3000`
 
-### User Flow
+## User Flow
 
-#### Listing Employees
+### Listing Employees
 
 ![image info](./screenshots/employee-list.png)
 
 From the employee list, you can filter by `Status` and `Department`, as well as sort by `Name`, `Position`, `Department`, and `Status`.
 
-#### Creating a New Employee
+### Creating a New Employee
 
 ![image info](./screenshots/new-employee.png)
 
 To add an employee, click on "New Employee" on the root of the application (`http://localhost:3000`). After filling out employee information and pressing `Create`, you will see the new employee on the employee list.
 
-#### Editing an Employee
+### Editing an Employee
 
 ![image info](./screenshots/edit-employee.png)
 
 To edit an employee, click on the employee's name on the employee list. After editing employee information and pressing `Update`, you will see the updated employee data reflected on the employee list page at the root of the application.
 
-#### Delete an Employee
+### Delete an Employee
 
 ![image info](./screenshots/delete-employee.png)
 
 To delete an employee, navigate to the root of the application (`http://localhost:3000`) click on the red trash can to the corresponding employee you would like to delete. After deleting the employee, the list will be updated to exclude the deleted employee.
 
-### REST API Endpoints
+## REST API Endpoints
 
-#### Create Employee
+### Create Employee
 
 `POST /api/employee`
 
@@ -56,7 +56,7 @@ To delete an employee, navigate to the root of the application (`http://localhos
 | bio         | string                          | no       |
 | status      | string ("active" or "inactive") | yes      |
 
-##### Example cURL command
+#### Example cURL command
 
 $ `curl -X POST http://localhost:3000/api/employee \
 -H "Content-Type: application/json" \
@@ -117,11 +117,11 @@ Example Response
 }
 ```
 
-#### Delete Employee
+### Delete Employee
 
 `DELETE /api/employee/id`
 
-##### Example cURL command
+#### Example cURL command
 
 $ `curl -X DELETE http://localhost:3000/api/employee/[employee-id]`
 
@@ -133,7 +133,7 @@ Example Response
 }
 ```
 
-#### Get Employee
+### Get Employee
 
 `GET /api/employee/id`
 
@@ -156,7 +156,7 @@ Example Response
 }
 ```
 
-#### List Employees
+### List Employees
 
 `GET /api/employee/id`
 
