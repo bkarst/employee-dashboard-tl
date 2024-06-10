@@ -36,9 +36,9 @@ To edit an employee, click on the employee's name on the employee list. After ed
 
 ### Delete an Employee
 
-![image info](./screenshots/delete-employee.png)
-
 To delete an employee, navigate to the root of the application (`http://localhost:3000`) click on the red trash can to the corresponding employee you would like to delete. After deleting the employee, the list will be updated to exclude the deleted employee.
+
+![image info](./screenshots/delete-employee.png)
 
 ## REST API Endpoints
 
