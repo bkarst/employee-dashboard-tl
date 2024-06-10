@@ -16,17 +16,17 @@ This employee management application streamlines HR operations by providing a re
 
 ### User Flow
 
-#### Creating a New Employee
-
-![image info](./screenshots/new-employee.png)
-
-To add an employee, click on "New Employee" on the root of the application (`http://localhost:3000`). After filling out employee information and pressing `Create`, you will see the new employee on the employee list.
-
 #### Listing Employees
 
 ![image info](./screenshots/employee-list.png)
 
 From the employee list, you can filter by `Status` and `Department`, as well as sort by `Name`, `Position`, `Department`, and `Status`.
+
+#### Creating a New Employee
+
+![image info](./screenshots/new-employee.png)
+
+To add an employee, click on "New Employee" on the root of the application (`http://localhost:3000`). After filling out employee information and pressing `Create`, you will see the new employee on the employee list.
 
 #### Editing an Employee
 
@@ -34,7 +34,13 @@ From the employee list, you can filter by `Status` and `Department`, as well as 
 
 To edit an employee, click on the employee's name on the employee list. After editing employee information and pressing `Update`, you will see the updated employee data reflected on the employee list page at the root of the application.
 
-### API Endpoints
+#### Delete an Employee
+
+![image info](./screenshots/delete-employee.png)
+
+To delete an employee, navigate to the root of the application (`http://localhost:3000`) click on the red trash can to the corresponding employee you would like to delete. After deleting the employee, the list will be updated to exclude the deleted employee.
+
+### REST API Endpoints
 
 #### Create Employee
 
@@ -55,6 +61,23 @@ To edit an employee, click on the employee's name on the employee list. After ed
 $ `curl -X POST http://localhost:3000/api/employee \
 -H "Content-Type: application/json" \
 -d '{"employee_id":"1234","name":"John Doe","department":"Engineering","position":"Developer","salary":800,"bio":"John analyzes company data to drive decisions.","status":"active"}'`
+
+Example Response
+
+```json
+{
+  "employee": {
+    "id": 70,
+    "employee_id": "1234",
+    "name": "John Doe",
+    "department": "Engineering",
+    "position": "Developer",
+    "bio": "John analyzes company data to drive decisions.",
+    "status": "active",
+    "salary": 800
+  }
+}
+```
 
 #### Update Employee
 
@@ -137,4 +160,53 @@ Example Response
 
 `GET /api/employee/id`
 
-$ `curl https://api.example.com/api/employee/[employee-id]`
+$ `curl http://localhost:3000/api/employees`
+
+Example Response
+
+```json
+{
+  "employees": [
+    {
+      "id": 57,
+      "employee_id": "E002",
+      "name": "John Doe",
+      "department": "Engineering",
+      "position": "Software Engineer",
+      "bio": "John has been with the company for 5 years.",
+      "status": "active",
+      "salary": 90000
+    },
+    {
+      "id": 62,
+      "employee_id": "E002",
+      "name": "David Green",
+      "department": "Engineering",
+      "position": "Data Scientist",
+      "bio": "David analyzes company data to drive decisions.",
+      "status": "active",
+      "salary": 95000
+    },
+    {
+      "id": 59,
+      "employee_id": "E004",
+      "name": "Alice Johnson",
+      "department": "Human Resources",
+      "position": "HR Specialist",
+      "bio": "Alice has a background in employee relations.",
+      "status": "active",
+      "salary": 70000
+    },
+    {
+      "id": 58,
+      "employee_id": "E002",
+      "name": "Jane Smith",
+      "department": "Marketing",
+      "position": "Marketing Manager",
+      "bio": "Jane specializes in digital marketing.",
+      "status": "active",
+      "salary": 80000
+    }
+  ]
+}
+```
