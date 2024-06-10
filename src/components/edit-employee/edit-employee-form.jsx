@@ -42,7 +42,7 @@ export function EditEmployeeForm({ employee }) {
     console.log(data);
     data["id"] = employee.id;
     axios
-      .put("/api/employee", data)
+      .put(`/api/employee/${employee.id}`, data)
       .then(({ data }) => (window.location = "/"));
   }
 

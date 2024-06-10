@@ -33,7 +33,7 @@ export function NewEmployeeForm() {
 
   function onSubmit(data) {
     console.log(data);
-    axios.post("/api/employee", data).then(({ data }) => window.location = '/');
+    axios.post("/api/employee", data).then(({ data }) => null);
   }
 
   return (

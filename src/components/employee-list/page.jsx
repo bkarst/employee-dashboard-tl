@@ -67,7 +67,7 @@ export default function EmployeeList() {
 
   const deleteEmployee = (employeeId) => {
     if (confirm("Are you sure?")) {
-      axios.delete(`/api/employee?id=${employeeId}`).then(() => {
+      axios.delete(`/api/employee/${employeeId}`).then(() => {
         setEmployees(employees.filter((employee) => employee.id != employeeId));
       });
     }
@@ -122,9 +122,9 @@ export default function EmployeeList() {
         </div>
       </header>
       <main className="flex-1 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold">Employees</h1>
-          <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between mb-6 flex-wrap" >
+          <h1 className="text-2xl font-bold mb-4 sm:mb-0">Employees</h1>
+          <div className="flex items-center gap-4 flex-wrap">
             <NewEmployee />
             <Select onValueChange={(value) => {
                 addFilter("department", value);
