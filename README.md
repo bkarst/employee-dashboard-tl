@@ -18,21 +18,21 @@ This employee management application streamlines HR operations by providing a re
 
 ### Listing Employees
 
-![image info](./screenshots/employee-list.png)
-
 From the employee list, you can filter by `Status` and `Department`, as well as sort by `Name`, `Position`, `Department`, and `Status`.
+
+![image info](./screenshots/employee-list.png)
 
 ### Creating a New Employee
 
-![image info](./screenshots/new-employee.png)
-
 To add an employee, click on "New Employee" on the root of the application (`http://localhost:3000`). After filling out employee information and pressing `Create`, you will see the new employee on the employee list.
+
+![image info](./screenshots/new-employee.png)
 
 ### Editing an Employee
 
-![image info](./screenshots/edit-employee.png)
-
 To edit an employee, click on the employee's name on the employee list. After editing employee information and pressing `Update`, you will see the updated employee data reflected on the employee list page at the root of the application.
+
+![image info](./screenshots/edit-employee.png)
 
 ### Delete an Employee
 
