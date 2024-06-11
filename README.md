@@ -4,9 +4,16 @@ This employee management application streamlines HR operations by providing a re
 
 ## Getting Started
 
+#### Prerequisites
+
+  - Node.js (Version: >=18.x)
+  - PostgreSQL (Version: >=13.x)
+
 1. Run `npm install` in the root directory of the project.
 
 2. Create a `.env` file in the root directory or the project and set the `DATABASE_URL` to the desired postgres connection string. Refer to `.env.sample` as an example.
+
+`DATABASE_URL='postgresql://<user>:<pass>@<db-host>:<db-port>'`
 
 3. Run `npx prisma db push` to push the initial schema to the database.
 
